@@ -1,0 +1,21 @@
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Node modules
+node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Build artifacts
+dist/
+build/
+
+# Docker
+.env
