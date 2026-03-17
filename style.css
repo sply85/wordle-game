@@ -1,0 +1,304 @@
+/* Wordle Game Styles */
+:root {
+    --color-correct: #6aaa64;
+    --color-present: #c9b458;
+    --color-absent: #787c7e;
+    --color-empty-border: #d3d6da;
+    --color-background: #ffffff;
+    --color-text: #1a1a1a;
+    --color-keyboard-bg: #d3d6da;
+    --color-keyboard-text: #1a1a1a;
+    --color-header: #1a1a1a;
+    --color-shadow: rgba(0, 0, 0, 0.1);
+    --border-radius: 8px;
+    --transition-speed: 0.15s;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-background: #121213;
+        --color-text: #ffffff;
+        --color-empty-border: #3a3a3c;
+        --color-keyboard-bg: #818384;
+        --color-keyboard-text: #ffffff;
+        --color-header: #ffffff;
+        --color-shadow: rgba(255, 255, 255, 0.05);
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: var(--color-background);
+    color: var(--color-text);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    transition: background-color var(--transition-speed);
+}
+
+.container {
+    max-width: 500px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--color-empty-border);
+    padding-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--color-header);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+header h1 i {
+    color: var(--color-correct);
+}
+
+.game-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.btn {
+    background-color: var(--color-empty-border);
+    color: var(--color-text);
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 10px 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color var(--transition-speed);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn:hover {
+    background-color: var(--color-absent);
+    color: white;
+}
+
+.btn i {
+    font-size: 1.1rem;
+}
+
+.message {
+    padding: 10px 16px;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    min-height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    max-width: 300px;
+}
+
+.game-board {
+    display: flex;
+    justify-content: center;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    gap: 8px;
+    width: fit-content;
+}
+
+.tile {
+    width: 62px;
+    height: 62px;
+    border: 2px solid var(--color-empty-border);
+    border-radius: var(--border-radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    user-select: none;
+    transition: all var(--transition-speed);
+}
+
+.tile.filled {
+    border-color: var(--color-absent);
+    animation: pop 0.1s ease;
+}
+
+.tile.correct {
+    background-color: var(--color-correct);
+    color: white;
+    border-color: var(--color-correct);
+}
+
+.tile.present {
+    background-color: var(--color-present);
+    color: white;
+    border-color: var(--color-present);
+}
+
+.tile.absent {
+    background-color: var(--color-absent);
+    color: white;
+    border-color: var(--color-absent);
+}
+
+@keyframes pop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-8px); }
+    40%, 80% { transform: translateX(8px); }
+}
+
+.shake {
+    animation: shake 0.6s ease;
+}
+
+.keyboard {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.keyboard-row {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+}
+
+.keyboard button {
+    background-color: var(--color-keyboard-bg);
+    color: var(--color-keyboard-text);
+    border: none;
+    border-radius: 4px;
+    height: 58px;
+    min-width: 44px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color var(--transition-speed);
+    user-select: none;
+}
+
+.keyboard button:hover {
+    filter: brightness(0.95);
+}
+
+.keyboard button:active {
+    transform: scale(0.96);
+}
+
+.keyboard button.correct {
+    background-color: var(--color-correct);
+    color: white;
+}
+
+.keyboard button.present {
+    background-color: var(--color-present);
+    color: white;
+}
+
+.keyboard button.absent {
+    background-color: var(--color-absent);
+    color: white;
+}
+
+.enter-key, .backspace-key {
+    flex-grow: 1;
+    font-size: 0.9rem;
+    gap: 6px;
+}
+
+.backspace-key i {
+    font-size: 1.4rem;
+}
+
+footer {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--color-absent);
+    border-top: 1px solid var(--color-empty-border);
+    padding-top: 20px;
+}
+
+.instructions {
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.credits {
+    font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 550px) {
+    .tile {
+        width: 52px;
+        height: 52px;
+        font-size: 1.8rem;
+    }
+
+    .keyboard button {
+        height: 52px;
+        min-width: 36px;
+        font-size: 1rem;
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+
+    .btn {
+        padding: 8px 12px;
+    }
+}
+
+@media (max-width: 400px) {
+    .tile {
+        width: 46px;
+        height: 46px;
+        font-size: 1.6rem;
+    }
+
+    .keyboard button {
+        height: 48px;
+        min-width: 32px;
+        font-size: 0.9rem;
+    }
+}

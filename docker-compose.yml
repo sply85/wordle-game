@@ -1,0 +1,16 @@
+# Wordle Game Docker Compose
+version: '3.8'
+
+services:
+  wordle-game:
+    build: .
+    container_name: wordle-game
+    restart: unless-stopped
+    ports:
+      - "9100:80"
+    networks:
+      - wordle-network
+
+networks:
+  wordle-network:
+    driver: bridge
